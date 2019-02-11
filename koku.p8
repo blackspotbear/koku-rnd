@@ -64,6 +64,9 @@ end
 
 function _draw()
 	cls()
+
+	-- draw emitter
+	circfill(64,64,1,10)
 	for i=1,#bs do
 		pset(bs[i].x, bs[i].y, 14);
 	end
