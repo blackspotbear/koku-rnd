@@ -4,24 +4,26 @@ __lua__
 -- koku rnd
 -- blackspotbear 2016
 
-koku=10
-smax=3
-amax=0.25
-bmax=500
-bs={}
+koku=10 -- rnd = (rnd1 + rnd2 + ...) / koku
+smax=2 -- max speed
+amax=0.25 -- max angle
+bmax=500 -- max num of bullet
+bs={} -- bullets
 
+-- angle of fire
 function arnd(n)
 	a=0
 	for i=1,n do
-		a+=rnd(amax)-amax/2;
+		a+=rnd(amax)-amax/2
 	end
 	return a/n
 end
 
+-- bullet speed
 function srnd(n)
-	s=0;
+	s=0
 	for i=1,n do
-		s+=rnd(smax-1)
+		s+=rnd(smax)
 	end
 	return s/n+1
 end
@@ -33,7 +35,7 @@ function shot(d)
 		s=srnd(koku)
 	else
 		a=arnd(1)
-		s=srnd(1)	
+		s=srnd(1)
 	end
 	b.x=64;b.y=64
 	b.vx=s*cos(a)
@@ -43,7 +45,8 @@ function shot(d)
 end
 
 function _update()
-	d=1
+	-- shot bullets
+	d=1 -- bullet direction (right or left)
 	if #bs==0 then
 		for i=1,bmax do
 			bs[#bs+1]=shot(d)
@@ -53,8 +56,10 @@ function _update()
 
 	bt={}
 	for i=1,#bs do
+		-- move bullets
 		bs[i].x+=bs[i].vx
 		bs[i].y+=bs[i].vy
+		-- delete bullet if out of screen
 		if bs[i].x>=0 and bs[i].x<128 and bs[i].y>=0 and bs[i].y<128 then
 			bt[#bt+1]=bs[i]
 		end
@@ -68,7 +73,8 @@ function _draw()
 	-- draw emitter
 	circfill(64,64,1,10)
 	for i=1,#bs do
-		pset(bs[i].x, bs[i].y, 14);
+		-- draw particles
+		pset(bs[i].x, bs[i].y, 14)
 	end
 end
 __gfx__
