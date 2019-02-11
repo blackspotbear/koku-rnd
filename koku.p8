@@ -4,7 +4,7 @@ __lua__
 -- koku rnd
 -- blackspotbear 2016
 
-koku=10 -- rnd = (rnd1 + rnd2 + ...) / koku
+koku=25 -- rnd = (rnd1 + rnd2 + ...) / koku
 smax=2 -- max speed
 amax=0.25 -- max angle
 bmax=500 -- max num of bullet
